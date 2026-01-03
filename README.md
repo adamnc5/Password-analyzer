@@ -10,6 +10,6 @@ Java project that helps users choose the right password with respect to rules th
 **Output masking**: Password is printed in a secure way to maintain confidentiality.
 
 ## How the code works:
-Use of the while loop with boolean variables to make sure each rule is respected and if not requires the user to enter a new password that align with the security and policy rules.
+Use of the while loop with boolean variables to make sure each rule is respected and if not requires the user to enter a new password that aligns with the security and policy rules.
 
 Arrays were also used to compare the password entered by the user with the ones found in breach dictionaries.
