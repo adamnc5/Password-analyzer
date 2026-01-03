@@ -1,7 +1,7 @@
 # Password-analyzer
 Java project that helps users choose the right password with respect to rules that increase password complexity.
 ## Features used:
-**Policy compliance**: Requires the user to use a password with a minimum 9 character length.
+**Policy compliance**: Requires the user to use a password with a minimum 9 characters length.
 
 **Complexity**: Requires the use of mixed characters(digits, special characters).
 
