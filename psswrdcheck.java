@@ -8,15 +8,29 @@ public class psswrdcheck {
 		
 		Scanner in=new Scanner(System.in);
 		System.out.println("Welcome to the login page:");
+		System.out.println("Please enter your name:");
+		String name=in.nextLine();
 		String password="";
 		boolean isValid=false;//We pretend that the password is already not valid and try to meet the condition to make it valid.
 		while(!isValid) {
-			System.out.println("Please enter your password, your password must be at least 8 characters with at least one digit and one special character:");
+			System.out.println("Please enter your password, your password must be at least 9 characters, must not contain your name, at least one upper case letter, one digit and one special character:");
 
 			password=in.nextLine();
 		if(password.length()<=8) {	
 			System.out.println("Your password is too short, try again:");
 			continue;//If this condition is false, we will try again to write a new code with the condition considered.
+		}
+		boolean hasUpperCase=false;
+		for(int i=0;i<password.length();i++) {	
+			if(Character.isUpperCase(password.charAt(i))) {	
+				hasUpperCase=true;
+				break;
+			}
+		}
+		if(hasUpperCase==false) {	
+			System.out.println("Your password must contain at least one upper case letter, try again:");
+			continue;
+			
 		}
 		boolean hasDigit=false;
 		for(int i=0;i<password.length();i++) {	
@@ -56,6 +70,12 @@ public class psswrdcheck {
 			}
 		if(isCommon==true) {	
 			System.out.println("Your password was been found in the most used password, please use a more secure one:");
+			continue;
+		}
+		
+		if(password.toLowerCase().contains(name.toLowerCase()))// java is case sensitive, Adam is not the same as adam.Thus it will be considered a valid password.
+		{	
+			System.out.println("Your password must not contain your name, please try again:");
 			continue;
 		}
 		isValid=true;
