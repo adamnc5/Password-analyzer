@@ -1,93 +1,78 @@
 package passwordcheck;
+
+import java.io.Console;
+import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Console version of the original password checker.
+ * The password validation rules are now in PasswordAnalyzer.java.
+ */
 public class psswrdcheck {
-	
-	public static void main(String[] args) {
-		String[] commonpassword = {"123456789", "password123@", "admin123@", "iloveyou2@", "qwertyuiop123@"};//most used password found in breaches
-		
-		Scanner in=new Scanner(System.in);
-		System.out.println("Welcome to the login page:");
-		System.out.println("Please enter your name:");
-		String name=in.nextLine();
-		String password="";
-		boolean isValid=false;//We pretend that the password is already not valid and try to meet the condition to make it valid.
-		while(!isValid) {
-			System.out.println("Please enter your password, your password must be at least 9 characters, must not contain your name, at least one upper case letter, one digit and one special character:");
 
-			password=in.nextLine();
-		if(password.length()<=8) {	
-			System.out.println("Your password is too short, try again:");
-			continue;//If this condition is false, we will try again to write a new code with the condition considered.
-		}
-		boolean hasUpperCase=false;
-		for(int i=0;i<password.length();i++) {	
-			if(Character.isUpperCase(password.charAt(i))) {	
-				hasUpperCase=true;
-				break;
-			}
-		}
-		if(hasUpperCase==false) {	
-			System.out.println("Your password must contain at least one upper case letter, try again:");
-			continue;
-			
-		}
-		boolean hasDigit=false;
-		for(int i=0;i<password.length();i++) {	
-			if(Character.isDigit(password.charAt(i)))
-			{
-				hasDigit=true;
-				break;//break here make the code runs faster and no need to check the next character because the condition is already true.
-			}
-			}
-		
-		
-		if(hasDigit==false) {	
-			System.out.println("There is no number in your password, please try again using a number");
-			continue;//If this condition is false, we will try again to write a new code with the condition considered.
-		}
-		boolean hasSpecial=false;
-		for(int i=0;i<password.length();i++) {	
-			char s=password.charAt(i);
-			if(!Character.isLetterOrDigit(s) && !Character.isWhitespace(s))//if the character is not a space, number and letter then it's a special character.
-			{	
-			hasSpecial=true;
-			break;//break here make the code runs faster and no need to check the next character because the condition is already true.
-			}
-		}
-		if(hasSpecial==false) {	
-			System.out.println("There is no special character in your password, please try again using at least one special character:");
-			continue;
-		}
-		boolean isCommon=false;
-		for(int i=0;i<commonpassword.length;i++) {	
-			if(password.equals(commonpassword[i]))//check all the possibilities of the most used passwords
-			{	
-				isCommon=true;
-				break;
-			}
-			
-			}
-		if(isCommon==true) {	
-			System.out.println("Your password was been found in the most used password, please use a more secure one:");
-			continue;
-		}
-		
-		if(password.toLowerCase().contains(name.toLowerCase()))// java is case sensitive, Adam is not the same as adam.Thus it will be considered a valid password.
-		{	
-			System.out.println("Your password must not contain your name, please try again:");
-			continue;
-		}
-		isValid=true;
-	
-	}
-		for(int i=0;i<password.length();i++) {	
-			System.out.print("*");
-			
-			
-			
-		}
-		System.out.println();
-		System.out.println("Password hidden for security");
-	}
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Console console = System.console();
+
+        System.out.println("=== Password Analyzer (Educational Demo) ===");
+        System.out.println("Never enter a password you use for a real account.");
+        System.out.println("The program does not save or transmit passwords.");
+        System.out.println();
+
+        System.out.print("Optional name/username for personalized advice (or Enter to skip): ");
+        String username = input.nextLine();
+
+        if (console == null) {
+            System.out.println("NOTE: Your IDE does not provide a secure console.");
+            System.out.println("Password input will be VISIBLE. Use made-up test passwords only.");
+        }
+
+        while (true) {
+            System.out.println();
+            System.out.println("Check a password (minimum 15 characters).");
+            System.out.println("Tip: Phrases and spaces are allowed; symbols are optional.");
+
+            char[] entered;
+            if (console != null) {
+                entered = console.readPassword("Proposed password (type q to quit): ");
+                if (entered == null) {
+                    break;
+                }
+            } else {
+                System.out.print("Made-up password (type q to quit): ");
+                if (!input.hasNextLine()) {
+                    break;
+                }
+                entered = input.nextLine().toCharArray();
+            }
+
+            // Console.readPassword() offers masked input on a real terminal.
+            // Java Strings cannot be reliably erased from memory, so this is
+            // intentionally a local learning tool, NOT a production verifier.
+            String password = new String(entered);
+            Arrays.fill(entered, '\0');
+
+            if (password.equalsIgnoreCase("q")) {
+                break;
+            }
+
+            PasswordAnalyzer.Result result = PasswordAnalyzer.analyze(password, username);
+            if (result.isAccepted()) {
+                System.out.println("PASS: This password passes the demo's basic checks.");
+            } else {
+                System.out.println("NOT ACCEPTED. Here's why:");
+                for (String error : result.getErrors()) {
+                    System.out.println("- " + error);
+                }
+            }
+
+            for (String tip : result.getAdvice()) {
+                System.out.println("Tip: " + tip);
+            }
+            System.out.println("Passing is NOT proof of password strength or breach safety.");
+        }
+
+        System.out.println("Goodbye! No passwords were stored.");
+        // We don't close input here because doing so closes System.in.
+    }
 }

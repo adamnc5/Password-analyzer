@@ -1,0 +1,23 @@
+name: CodeQL Java Security Scan
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Initialize CodeQL (SAST)
+        uses: github/codeql-action/init@v4
+        with:
+          languages: java-kotlin
+          build-mode: none
+      - name: Analyze Java source code
+        uses: github/codeql-action/analyze@v4
