@@ -1,1 +1,77 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'"><title>Password Analyzer | Privacy-first security lab</title><meta name="description" content="Learn password security with fictional examples. Everything runs in your browser."><link rel="stylesheet" href="style.css"><script defer src="policy.js"></script><script defer src="ui.js"></script></head><body><div class="shell"><header><a class="brand" href="./">◈ Password<span>Analyzer</span></a><a class="link" href="https://github.com/adamnc5/Password-analyzer" target="_blank" rel="noopener noreferrer">GitHub source ↗</a></header><section class="hero"><div class="eyebrow">● OPEN-SOURCE SECURITY LAB · LOCAL ANALYSIS</div><h1>Explore better<br><em>password habits.</em></h1><p>Try <strong>made-up examples</strong> against a modern password policy. Your input stays in this browser tab—no backend, tracking, or account needed.</p><div class="features">✓ Private by design &nbsp; ✓ No password storage &nbsp; ✓ No server requests</div></section><main class="grid"><section class="panel"><div class="kicker">01 / INPUT</div><h2>Test the policy</h2><div class="warning"><b>⚠ Use imaginary passwords only.</b><br>Never type a password you use for a real account.</div><form id="checker" autocomplete="off"><label for="password">Example password</label><div class="secret"><input id="password" type="password" placeholder="Enter a fictional example…" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off"><button type="button" id="reveal" aria-pressed="false">Show</button></div><small id="length">0 / 15 characters minimum</small><label for="username">Name or username <span>(optional)</span></label><input id="username" type="text" placeholder="E.g. Alex" autocomplete="off" spellcheck="false"><small>Used for on-screen suggestions only.</small><div class="buttons"><button class="primary" type="submit">Analyze example →</button><button class="secondary" type="button" id="clear">Clear</button></div></form><div class="samples"><div class="kicker">OR TRY AN EXAMPLE</div><button data-example="short">Too short ↗</button><button data-example="common">Common pattern ↗</button><button data-example="phrase">Passphrase ↗</button></div></section><section class="panel"><div class="kicker">02 / ANALYSIS</div><h2>Policy results <span class="pill" id="status">READY</span></h2><div class="hero-result" id="result" aria-live="polite"><div class="symbol" id="symbol">◇</div><h3 id="verdict">Ready when you are</h3><p id="message">Enter a made-up password or choose an example to see the results.</p></div><div class="checks-heading">Security policy checks <small id="count">0 of 3 checked</small></div><div class="check" id="length-check"><b class="check-icon">–</b><div><strong>15 or more characters</strong><small>Passphrases, spaces and Unicode are allowed.</small></div></div><div class="check" id="common-check"><b class="check-icon">–</b><div><strong>Not on demo blocklist</strong><small>Small example list, not a real breach database.</small></div></div><div class="check" id="control-check"><b class="check-icon">–</b><div><strong>Valid demo input</strong><small>No control characters, at most 1,024 characters.</small></div></div><div class="advice" id="advice" hidden></div><p class="disclaimer">Passing does not mean a password is strong, unique or uncompromised.</p></section></main><section class="learn"><div class="kicker">03 / UNDER THE HOOD</div><h2>Designed to teach security.</h2><div class="cards"><article><span>01</span><h3>Local by default</h3><p>No password API, server-side checks, analytics, or storage.</p></article><article><span>02</span><h3>Length over complexity</h3><p>Based on modern password guidance: long phrases are welcome; special symbols aren't mandatory.</p></article><article><span>03</span><h3>Built with SSDLC</h3><p>Java reference implementation, STRIDE threat model, automated tests and CI/CD on GitHub.</p></article></div></section><footer><span>Educational password policy demo · Not an authentication system</span><span>Never test a real password.</span></footer></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light">
+  <title>Password Analyzer — Understand better passwords</title>
+  <meta name="description" content="A private-by-design educational password checker for made-up examples. Try fictional passwords with instant, local analysis.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="policy.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="page-shell" id="top">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Password Analyzer home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 10V7.5a5 5 0 0 1 10 0V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="3" fill="currentColor"/><circle cx="12" cy="15.5" r="1.5" fill="#10201c"/></svg></span>
+        <span>Password<span class="brand-dark">Analyzer</span></span>
+      </a>
+      <nav aria-label="Main"><a class="nav-link" href="#about">How it works</a><a class="nav-button" href="https://github.com/adamnc5/Password-analyzer" target="_blank" rel="noopener noreferrer">View GitHub <span aria-hidden="true">↗</span></a></nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse"></span> PRIVACY-FIRST SECURITY PLAYGROUND <span class="version">V2.0</span></div>
+          <h1 id="hero-title">Better passwords.<br><span>Better habits.</span></h1>
+          <p>See how modern password rules work. Type a <strong>fictional example</strong>, learn what passes, and understand why—instantly, right in your browser.</p>
+          <div class="trustline"><span>✓ No sign-up</span><span>✓ No saved passwords</span><span>✓ Runs in your browser</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true"><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div><div class="shield-illustration"><svg viewBox="0 0 80 90" fill="none"><path d="M40 5 70 17v24c0 22-11 35-30 44C21 76 10 63 10 41V17L40 5Z" fill="url(#shGrad)" stroke="rgba(255,255,255,.6)" stroke-width="2"/><path d="m27 44 9 9 18-20" stroke="#06281d" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/><defs><linearGradient id="shGrad" x1="0" y1="0" x2="80" y2="85"><stop stop-color="#bbffdb"/><stop offset="1" stop-color="#4ddab7"/></linearGradient></defs></svg></div><div class="float-chip chip-top">PASSWORD POLICY <span>● ACTIVE</span></div><div class="float-chip chip-bottom"><span>●</span> LOCAL ANALYSIS</div></div>
+      </section>
+
+      <section class="workspace" aria-label="Interactive password analyzer">
+        <div class="editor card">
+          <div class="card-top"><span class="section-label">01 / EXPERIMENT</span><span class="tiny-badge">INTERACTIVE DEMO</span></div>
+          <h2>Try a password</h2>
+          <p class="card-subtitle">Start typing and we'll analyze your example live.</p>
+          <div class="warning" role="note"><span class="warning-icon">!</span><span><strong>Only enter made-up passwords.</strong> Don't test anything used by a real account.</span></div>
+          <form id="analyzer-form" autocomplete="off" novalidate>
+            <label for="password">Your fictional password</label>
+            <div class="password-wrap"><input id="password" type="text" name="fictional-password" placeholder="Type a made-up password here..." autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" aria-describedby="input-help"><button id="toggle-visibility" class="toggle" type="button" aria-label="Hide example password" aria-pressed="true">Hide</button></div>
+            <div class="input-meta" id="input-help"><span id="character-count">0 characters</span><span>15 minimum</span></div>
+            <div class="meter" role="progressbar" aria-label="Length towards demo minimum" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0" id="meter"><span id="meter-fill"></span></div>
+            <label class="name-label" for="username">Name or username <span>(optional)</span></label>
+            <input id="username" class="name-input" type="text" name="example-username" placeholder="e.g. Alex" autocomplete="off" spellcheck="false">
+            <p class="field-note">Used only for on-screen tips. Nothing is sent or saved.</p>
+            <div class="form-actions"><button class="action-primary" type="submit" id="analyze-button">Analyze example <span aria-hidden="true">↗</span></button><button class="action-secondary" type="button" id="clear-button">Clear</button></div>
+          </form>
+          <div class="sample-block"><div class="sample-heading">DON'T KNOW WHAT TO TYPE? TRY THESE</div><div class="samples"><button type="button" class="sample-button" data-example="short">Short password <span>↗</span></button><button type="button" class="sample-button" data-example="common">Common password <span>↗</span></button><button type="button" class="sample-button" data-example="passphrase">Long passphrase <span>↗</span></button></div></div>
+        </div>
+
+        <div class="analysis card" aria-live="polite" aria-atomic="false">
+          <div class="card-top"><span class="section-label">02 / THE RESULTS</span><span id="results-tag" class="report-badge">READY</span></div>
+          <h2>Your security report</h2>
+          <p class="card-subtitle">A breakdown of the sample password policy.</p>
+          <div id="result-hero" class="result-banner"><div class="result-banner-icon" id="result-icon">◇</div><div><div class="result-eyebrow">POLICY ASSESSMENT</div><h3 id="result-title">Ready when you are</h3><p id="result-description">Type a fictional password to see which checks pass.</p></div></div>
+          <div class="check-head"><h3>Policy checks</h3><span id="checks-count">Waiting for input</span></div>
+          <div class="check-grid">
+            <div class="check-item" id="rule-length"><span class="check-symbol">—</span><div><strong>At least 15 characters</strong><p>Passphrases and spaces are welcome.</p></div></div>
+            <div class="check-item" id="rule-blocklist"><span class="check-symbol">—</span><div><strong>Not on the sample blocklist</strong><p>We check a small demo list only.</p></div></div>
+            <div class="check-item" id="rule-printable"><span class="check-symbol">—</span><div><strong>Valid demo input</strong><p>Printable characters, max. 1,024.</p></div></div>
+          </div>
+          <div id="advice" class="advice" hidden><strong>💡 Helpful suggestions</strong><ul id="advice-list"></ul></div>
+          <div class="report-note">ⓘ Passing these checks <strong>does not prove</strong> a password is strong, unique, or uncompromised.</div>
+        </div>
+      </section>
+
+      <section id="about" class="education" aria-labelledby="education-title"><div class="education-top"><div><span class="education-tag">BEHIND THE SCENES</span><h2 id="education-title">Built with security in mind.</h2><p>A small project that demonstrates real cybersecurity concepts.</p></div><a href="https://github.com/adamnc5/Password-analyzer/tree/main/docs" target="_blank" rel="noopener noreferrer">Explore SSDLC documentation ↗</a></div><div class="education-grid"><article><div class="education-icon">◎</div><span>01 · PRIVACY</span><h3>Runs locally</h3><p>Validation happens in JavaScript right here in your browser. No accounts, APIs, analytics or password collection.</p></article><article><div class="education-icon">⌁</div><span>02 · POLICY</span><h3>Length over tricks</h3><p>Our example uses 15 Unicode characters and supports long passphrases. No forced symbol or uppercase rules.</p></article><article><div class="education-icon">▤</div><span>03 · DEVSECOPS</span><h3>Verified by CI</h3><p>Java reference code, a STRIDE threat model, security requirements, automated tests and GitHub Actions.</p></article></div></section>
+    </main>
+    <footer><span><strong>PasswordAnalyzer</strong> · A learning project, not an authentication system.</span><span>Made for fictional test passwords only. <a href="https://github.com/adamnc5/Password-analyzer" target="_blank" rel="noopener noreferrer">Source code ↗</a></span></footer>
+  </div>
+  <noscript><div class="no-script">JavaScript is required for live analysis. Enable JavaScript to use the demo.</div></noscript>
+</body>
+</html>
