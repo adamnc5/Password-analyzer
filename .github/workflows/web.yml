@@ -16,4 +16,4 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check docs/policy.js
-          node --check docs/ui.js
+          node --check docs/app.js
